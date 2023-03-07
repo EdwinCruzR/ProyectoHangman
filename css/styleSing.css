@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f1f1f1;
+    background-image: linear-gradient(#bcd2e490 2px, transparent 0);
+    background-size: 100% 5vmin;
+
+    
+    display: flex;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+
+.bRegresar{
+    position: fixed;
+    left: 15px;
+    top: 25px;
+    /* padding: 25px 20px; */
+}
+
+.btnBack {
+    text-decoration: none;
+    background-color: orange;
+    color: #302f2f;
+    padding: 10px 20px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.btnBack:hover{
+    background-color: #eec043;
+    color: #000000;
+    letter-spacing: 1px;
+}
+
+.titulo{
+    position: absolute;
+    left: 50%;
+    top: 9%;
+    transform: translate(-50%, -50%);
+}
+
+#titulo{
+    position: relative;
+    height: 50px;
+    width: 300px;
+    line-height: 50px;
+    text-align: center;
+    font-size: 42px;
+    font-weight: 650;
+    text-transform: uppercase;
+    /* display: block; */
+    color: #d3c277;
+  }
+
+.form{
+    /* background-color: rgba(209, 207, 207, 0.404); */
+    background-color: rgba(209, 207, 207, 0.838);
+    margin: auto;
+    width: 90%;
+    max-width: 400px;
+    padding: 3.4em 3em; /* 1em = 16px */
+    border-radius: 20px;
+    text-align: center;
+}
+
+.formTitle{
+    font-size: 2rem; /* 2 × 16px = 32px */
+    margin-bottom:.5em ;
+}
+
+.formParagraph{
+    font-weight: 300;
+}
+
+.formLink{
+    font-weight: 300;
+    color: #000000;
+}
+
+.formContainer{
+    margin-top: 3em;
+    display: grid;
+    gap: 2.1em; 
+    /* gap es el saparado  */
+}
+
+
+.input-field{
+    position: relative;
+}
+
+.input-field input{
+    width: 300px;
+    height: 40px;
+    border-radius: 6px;
+    font-size: 18px;
+    padding: 0 10px;
+    border: 2px solid #fff;
+    background: transparent;
+    color: rgb(0, 0, 0);
+    outline: none;
+    /* transition: 0.2s; */
+}
+
+.input-field label{
+    position: absolute;
+    top: -11px;
+    left: 8px;
+    transform: translateY(-50%);
+    color: rgb(54, 54, 54);
+    font-size: 16px;
+    pointer-events: none;
+    padding: 0 2px;
+    transition: 0.3s;
+    /* background: rgb(153, 153, 153); */
+}
+
+input:focus{
+    border: 2px solid #272626;
+}
+
+/* input:focus ~ label,
+input:valid ~ label{
+  top: 0;
+  left: 15px;
+  font-size: 16px;
+  padding: 0 2px;
+  background: rgb(153, 153, 153);
+} */
+
+.formSubmit{
+    background: #ffb451;
+    height: 35px;
+    border: none;
+    border-radius: 15px;
+    font-size: 19px;
+    transition: all 0.3s ease;
+
+}
+
+.formSubmit:hover{
+    background-color: orange;
+    color: #000000;
+    letter-spacing: 1px;
+    -webkit-box-shadow: 0px 0px 39px -2px rgba(253, 142, 6, 1);
+    -moz-box-shadow: 0px 0px 39px -2px rgba(253, 142, 6, 1);
+    box-shadow: 0px 0px 39px -2px rgba(253, 142, 6, 1);
+
+}

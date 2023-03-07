@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman Game</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./css/menuInforme.css">
+</head>
+<body>
+    <div class="page">
+        <header tabindex="0">Informe</header>
+        <div id="nav-container">
+          <div class="bg"></div>
+          <div class="button" tabindex="0">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </div>
+          <div id="nav-content" tabindex="0">
+            <ul>
+              <!-- <li><a href="#crearcategoria">Crear categoria</a></li>
+              <li><a href="#consultar">Consultar categoria</a></li>
+              <li><a href="#editar">Editar categoria</a></li>
+              <li><a href="#eliminar">Eliminar categoria</a></li> -->
+              <li class="small"><a href="menu2.php">Regresar</a><!-- <a href="#0">Instagram</a> --></li>
+            </ul>
+          </div>
+        </div>
+      
+        <main>
+          <div class="content">
+            <h2><span>Consulta</span> tus: Salas</h2>
+            <p>En este espacio vas a poder consultar tus salas.</p>
+            <!-- <small><strong>NB!</strong> Use a browser that supports :focus-within</small> -->
+          </div>
+          <hr>
+          <div class="col-10 p-2">
+            <button type="button" class="btn btn-primary" onclick="aplicacion.add();">
+              Nuevo producto
+            </button>
+            <div class="table-responsive-sm">
+              <table class="table table-sm">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col"></th>
+                    <th scope="col">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="productos">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script>
+      var aplicacion = new function () {
+        var url = "./bd/index.php";
+        const modaleditar = new bootstrap.Modal(document.getElementById("modaleditar"));
+        const modalagregar = new bootstrap.Modal(document.getElementById("modalagregar"));
+        const modalborrar = new bootstrap.Modal(document.getElementById("modalborrar"));
+        this.nombre = document.getElementById("nombre");
+        this.precio = document.getElementById("precio");
+        this.nombreEdicion = document.getElementById("nombreEdicion");
+        this.precioEdicion = document.getElementById("precioEdicion");
+        this.idEdicion = document.getElementById("idEdicion");
+        this.nombreBorrar = document.getElementById("nombreBorrar");
+        this.precioBorrar = document.getElementById("precioBorrar");
+        this.idBorrar = document.getElementById("idBorrar");
+        this.productos = document.getElementById('productos');
+  
+        this.leer = () => {
+          var datos = "";
+          fetch(url + "?leer=1")
+            .then(r => r.json())
+            .then((respuesta) => {
+              respuesta.map(
+                function (producto, index, array) {
+                  datos += "<tr scope='row'>";
+                  datos += "<td>" + (index + 1) + "</td>";
+                  datos += "<td>" + producto.id + "</td>";
+                  datos += "<td>" + producto.nombre + "</td>";
+                  datos += "<td>" + producto.precio + "</td>";
+                  datos += '<td><button onclick="aplicacion.editar(' + producto.id + ');" type="button" class="btn btn-success">Edtar</button>';
+                  datos += '<button onclick="aplicacion.borrar(' + producto.id + ');" type="button" class="btn btn-danger" >Eliminar</button></td>';
+                  datos += "</tr>";
+                }
+              );
+              return this.productos.innerHTML = datos;
+            })
+            .catch(console.log());
+        };
+  
+        this.add = () => {
+          this.nombre.value = "";
+          this.precio.value = "";
+          modalagregar.show();
+        };
+  
+        this.agregar = () => {
+          var datosEnviar = { nombre: this.nombre.value, precio: this.precio.value }
+          fetch(url + "?insertar=1", { method: "POST", body: JSON.stringify(datosEnviar) })
+            .then(respuesta => respuesta.json())
+            .then((datosRespuesta) => {
+              this.leer();
+              modalagregar.hide();
+            })
+            .catch(console.log);
+        };
+  
+        this.borrar = (id) => {
+          fetch(url + "?consultar=" + id)
+            .then(respuesta => respuesta.json())
+            .then((datosRespuesta) => {
+              this.idBorrar.value = datosRespuesta[0]['id'];
+              this.nombreBorrar.value = datosRespuesta[0]['nombre'];
+              this.precioBorrar.value = datosRespuesta[0]['precio'];
+            })
+            .catch(console.log);
+          modalborrar.show();
+        };
+  
+        this.eliminar = () => {
+          fetch(url + "?borrar=" + this.idBorrar.value)
+            .then(respuesta => respuesta.json())
+            .then((datosRespuesta) => {
+              modalborrar.hide();
+              this.leer();
+            })
+            .catch(console.log);
+        };
+  
+        this.editar = (id) => {
+          fetch(url + "?consultar=" + id)
+            .then(respuesta => respuesta.json())
+            .then((datosRespuesta) => {
+              this.idEdicion.value = datosRespuesta[0]['id'];
+              this.nombreEdicion.value = datosRespuesta[0]['nombre'];
+              this.precioEdicion.value = datosRespuesta[0]['precio'];
+            })
+            .catch(console.log);
+          modaleditar.show();
+        };
+  
+        this.actualizar = () => {
+          var datosEnviar = { id: this.idEdicion.value, nombre: this.nombreEdicion.value, precio: this.precioEdicion.value }
+          fetch(url + "?actualizar=1", { method: "POST", body: JSON.stringify(datosEnviar) })
+            .then(respuesta => respuesta.json())
+            .then((datosRespuesta) => {
+              this.leer();
+            })
+            .catch(console.log);
+          modaleditar.hide();
+        };
+      }
+      aplicacion.leer();
+    </script>
+</body>
+</html>

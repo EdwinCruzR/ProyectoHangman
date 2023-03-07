@@ -1,0 +1,303 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Outline&family=Bungee+Shade&family=Bungee+Spice&family=Diplomata&family=Faster+One&family=Gloria+Hallelujah&family=Holtwood+One+SC&family=Nabla&family=Nosifer&family=Press+Start+2P&family=Rampart+One&family=Rubik+Mono+One&family=Silkscreen&family=Sofia+Sans:ital,wght@1,100&family=Staatliches&display=swap');
+
+
+*{
+  font-family: 'Poppins', sans-serif;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    background-color: #f1f1f1;
+    background-image: linear-gradient(#bcd2e490 2px, transparent 0);
+    background-size: 100% 5vmin;
+    font-family: 'Poppins', sans-serif;
+    /* background-image: radial-gradient(#7d7d85 2px, #e5e5f7 2px);
+    background-size: 40px 40px; */
+}
+
+.container{
+    display: flex;
+    position: relative;
+    height: 100vh;
+    /* object-fit: cover; */
+}
+
+.container img{
+    top: 15%;
+    left: 5%;
+    position: absolute;
+    /* margin: auto; */
+    fill: transparent;
+}
+
+.headH{
+  visibility: hidden;
+}
+
+.bodyH{
+  visibility: hidden;
+}
+
+.armLH{
+  visibility: hidden;
+}
+
+.armRH{
+  visibility: hidden;
+}
+
+.legLH{
+  visibility: hidden;
+}
+
+.legRH{
+  visibility: hidden;
+}
+
+
+
+.words{
+    top: 20%;
+    right: 15%;
+    position: absolute;
+    width: 50%;
+    height: 30px;
+    
+}
+
+.clue{
+    top: 5%;
+    right: 15%;
+    height: 50px;
+    width: 50%;
+    position: absolute;
+    /* background-color:brown; */
+}
+
+.tries{
+    left: 25%;
+    height: 60px;
+    width: 5%;
+    position: absolute;
+    text-align: center;
+    /* background-color: #8fc866; */
+}
+
+.colortemp{
+    right: 8%;
+    height: 60px;
+    width: 5%;
+    position: absolute;
+    /* text-align: center; */
+    /* background-color: #8fc866; */
+}
+
+.form{
+  top: 40%;
+  left: 35%;
+  width: 500px;
+  max-width: 600px;
+  height: 200px;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: absolute;
+}
+
+.input-past-verb{
+  visibility: hidden;
+    position: relative;
+    width: 80%;
+    height: 80px;
+}
+input{
+  width: 500px;
+  height: 30px;
+}
+
+.divbtns {
+  position: absolute;
+  right: 20%;
+  background-color: transparent;
+  width: 730px;
+  display: flex;
+  border-radius: 8px;
+  color: blanchedalmond;
+  bottom: 5%;
+}
+
+.btns {
+  cursor: pointer;
+  margin: 2px;
+  padding: 3px;
+  border-radius: 15px;
+  width: 1.5rem;
+  font-size: 1rem;
+}
+
+.btns:hover {
+    background-color: coral;
+}
+
+.action {
+  
+  position: fixed;
+  bottom: 50px;
+  left: 50px;
+  width: 50px;
+  height: 50px;
+  background: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 5px 5px rgba(0,0,0,0.1);
+}
+
+.action span {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* color: #a13dea; */
+  color: #ff0505;
+  font-size: 2em;
+  transition: .3s ease-in-out;
+}
+
+.action.active span  {
+  transform: rotate(135deg);
+}
+
+.action ul {
+  
+  position: absolute;
+  bottom: 55px;
+  background: #fff;
+  min-width: 250px;
+  padding: 20px;
+  border-radius: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: .3s;
+}
+.action.active ul {
+  
+  bottom: 65px;
+  opacity: 1;
+  visibility: visible;
+  transition: .3s;
+}
+.action ul li {
+  list-style:none;
+  text-decoration: none;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 7px 0;
+  
+}
+
+.action .ul .li a{
+  text-decoration: none;
+  
+}
+
+a:any-link {
+  text-decoration: none;
+  color: #302f2f;
+}
+
+.action ul li:hover {
+  font-weight: 600;
+}
+.action ul li:not(:last-child) {
+  
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.containerC1 input,
+.containerC2 input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+  margin: 8px
+}
+
+.containerC1 {
+  visibility: hidden;
+  display: flex;
+  position: relative;
+  cursor: pointer;
+  font-size: 20px;
+  user-select: none;
+  margin: 8px 0px;
+  left: 15%;
+}
+
+.containerC2 {
+  visibility: hidden;
+  display: flex;
+  left: 45%;
+  bottom: 37px;
+  position: relative;
+  cursor: pointer;
+  font-size: 20px;
+  user-select: none;
+  margin: 8px 0px;
+  
+ }
+ 
+ /* Create a custom checkbox */
+ .checkmark {
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 1.3em;
+  width: 1.3em;
+  background-color: #ccc;
+  border-radius: 25px;
+  /* visibility: hidden; */
+  transition: 0.15s;
+ }
+ 
+ /* When the checkbox is checked, add a blue background */
+ .containerC1 input:checked ~ .checkmark,
+ .containerC2 input:checked ~ .checkmark {
+  background-color: limegreen;
+  border-radius: 25px;
+  transition: 0.15s;
+ }
+ 
+ /* Create the checkmark/indicator (hidden when not checked) */
+ .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+ }
+ 
+ /* Show the checkmark when checked */
+ .containerC1 input:checked ~ .checkmark:after,
+ .containerC2 input:checked ~ .checkmark:after {
+  display: block;
+ }
+ 
+ /* Style the checkmark/indicator */
+ .containerC1 .checkmark:after,.containerC2 .checkmark:after {
+  left: 0.45em;
+  top: 0.25em;
+  width: 0.25em;
+  height: 0.5em;
+  border: solid white;
+  border-width: 0 0.15em 0.15em 0;
+  transform: rotate(45deg);
+ }
+
+ .formSubmit{
+  visibility: hidden;
+ }

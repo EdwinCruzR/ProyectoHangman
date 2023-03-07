@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman Game</title>
+    <link rel="stylesheet" href="./css/menuPalabra.css">
+</head>
+<body>
+    <div class="page">
+        <header tabindex="0">Palabras</header>
+        <div id="nav-container">
+          <div class="bg"></div>
+          <div class="button" tabindex="0">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </div>
+          <div id="nav-content" tabindex="0">
+            <ul>
+              <li><a href="#crearPalabra">Crear palabras</a></li>
+              <li><a href="#consultar">Consultar palabras</a></li>
+              <li><a href="#editar">Editar palabras</a></li>
+              <li><a href="#eliminar">Eliminar palabras</a></li>
+              <li class="small"><a href="menu2.php">Regresar</a><!-- <a href="#0">Instagram</a> --></li>
+            </ul>
+          </div>
+        </div>
+      
+        <main>
+          <div class="content">
+            <h2>Personaliza tus<span>: palabras</span></h2>
+            <p>En este espacio vas a poder personalizar una palabra, ya sea, crear una palabra, consultar una palabra, editar una palabra y eliminar una palabra.</p>
+            <!-- <small><strong>NB!</strong> Use a browser that supports :focus-within</small> -->
+          </div>
+          <hr>
+          <div id="crearpalabras" class="crearpalabras">
+            <h1>Crear palabras</h1>
+            <form class="from-crear">
+                <div class="formContainer">
+                    <div class="input-field">
+                        <input type="text" spellcheck="false" name="nombre" required> 
+                        <label>Nombre de la palabra</label>
+                    </div>
+                    <div class="input-field"> 
+                        <input type="text" spellcheck="false" name="descripción" required> 
+                        <label>Descripción de la palabra</label>
+                    </div>
+                    <div class="input-DP">
+                        <label>Regulares</label>
+                        <input type="checkbox" spellcheck="false" name="no" required> 
+                        <label>Irregulares</label>
+                        <input type="checkbox" spellcheck="false" name="no" required> 
+                        <label>Easy </label>
+                        <input type="checkbox" spellcheck="false" name="no" required> 
+                        <label>Medium</label>
+                        <input type="checkbox" spellcheck="false" name="no" required> 
+                        <label>Hard</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="text" spellcheck="false" name="creador" required> 
+                        <label>Nombre del creador</label>
+                    </div>
+                    <input type="submit" class="formSubmit" name="Crear" value="Crear">
+                </div>
+            </form>
+          </div>
+          <hr>
+          <div id="consultar" class="consultar">
+            <h1>Consultar palabras</h1>
+            <form class="formConsultar">
+                <div class="formContainer">
+                    <div class="input-field">
+                        <!-- <input type="text" spellcheck="false" name="nombre" required>  -->
+                        <label>Id</label>
+                    </div>
+                    <div class="input-field">
+                        <!-- <input type="email" id="email" name="email" required> -->
+                        <label>Nombre</label>
+                    </div>
+                    <div class="input-field">
+                        <!-- <input type="password" spellcheck="false" name="password" required>  -->
+                        <label>Descripcion</label>
+                    </div>
+                    <div class="input-field">
+                        <!-- <input type="password" spellcheck="false" name="password" required>  -->
+                        <label>Fecha</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="button" spellcheck="false" name="palabra" value="lista de palabras" required> 
+                    </div>
+                    <div class="input-field">
+                        <input type="button" spellcheck="false" name="editar" value="Editar" required> 
+                    </div>
+                    <div class="input-field">
+                        <input type="button" spellcheck="false" name="eliminar" value="Eliminar" required> 
+                    </div>
+                    <input type="submit" class="formSubmit" name="consultar" value="Consultar">
+                </div>
+            </form>
+          </div>
+          <hr>
+          <div id="editar" class="editar">
+            <h1>Editar palabras</h1>
+          </div>
+          <hr>
+          <div id="eliminar" class="elimarpalabras">
+            <h1>Eliminar palabras</h1>
+          </div>
+          <hr>
+        </main>
+      </div>
+</body>
+</html>
