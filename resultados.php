@@ -9,20 +9,17 @@
 </head>
 <body onload=deshabilitaRetroceso()>
 
-<!-- <script>
-    console.log("Tiempo:" + window.time);
-</script> -->
-
 <?php
 
     include("conex_db.php");
 
     if(!empty($_POST['idVerbo'])){
-
+        $tiempo = $_POST['alTiempo'];
+        // echo $tiempo;
         $verboId = $_POST['idVerbo'];
         $tipoVerbo = isset($_POST['typeVerb']) ? $_POST['typeVerb'] : 0 ;
         $verboSimple =isset($_POST['pastverb']) ? mb_strtoupper(trim($_POST['pastverb'])) : 0 ;
-        $uLose = (int)$_POST['lose'];
+        // $uLose = (int)$_POST['lose'];
 
         $resultado2=mysqli_query($conexion,"SELECT * FROM word WHERE id = '$verboId'");
 
@@ -36,21 +33,11 @@
         }
         // echo " = ".$simplePast;
 
-        if($uLose == -1){
             if($tipo == $tipoVerbo && $verboSimple == $simplePast){
-                winner($verbo,$tipo,$simplePast,$ejemplo);
+                winner($verbo,$tipo,$simplePast,$ejemplo,$tiempo);
             } else{
-                losser($verbo,$tipo,$simplePast,$ejemplo);
+                losser($verbo,$tipo,$simplePast,$ejemplo,$tiempo);
             }
-        }else{
-            if($uLose == 1){
-                losser($verbo,$tipo,$simplePast,$ejemplo);
-            }else{
-                if($uLose == 0){
-                    losser($verbo,$tipo,$simplePast,$ejemplo);
-                }
-            }
-        }
         
     } else{
 
@@ -65,7 +52,7 @@
 
 
 
-    function losser($verbo,$tipoVerb,$simplePas,$ejemplo){
+    function losser($verbo,$tipoVerb,$simplePas,$ejemplo,$tiempo){
         ?>
             <div class="conteiner">
             <div class="content">
@@ -109,7 +96,11 @@
                 </div>
 
                 <div class= "tx2">
-                    <p>Tu tiempo: aun no hay</p>
+                    <p>Tu tiempo:
+                    <?php 
+                        echo $tiempo;
+                    ?>
+                    </p>
                 </div>
                 
 
@@ -130,7 +121,7 @@
     }
 
 
-    function winner($verbo,$tipoVerb,$simplePas,$ejemplo)
+    function winner($verbo,$tipoVerb,$simplePas,$ejemplo,$tiempo)
         {
             ?>
             <div class="conteiner">
@@ -176,12 +167,16 @@
                     </div>
 
                     <div class= "tx2">
-                        <p>Tu tiempo:</p>
+                        <p>Tu tiempo:
+                        <?php 
+                            echo $tiempo;
+                        ?>
+                        </p>
                     </div>
-                    <div  class= "tiempo">
+                    <!-- <div  class= "tiempo">
                         <p id="showTime">Nuevo record: 0 </p>
                     </div>
-                    <div class= "tx6"><p>Anterior record: 0</p></div>
+                    <div class= "tx6"><p>Anterior record: 0</p></div> -->
 
                 </div>
                 <div class="statistics">

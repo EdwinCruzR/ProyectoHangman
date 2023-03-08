@@ -89,7 +89,8 @@
                             <input style="text-transform:uppercase" class="pastverb" type="text" spellcheck="false" name="pastverb" placeholder="Enter the verb in past" autocomplete="off" spellcheck="false" required> 
                         </div>
                         
-                        <input type="hidden" name="lose" value="-1">
+                        <!-- <input type="hidden" name="lose" value="-1"> -->
+                        <input id="alTiempo" type="hidden" name="alTiempo" value="00:00:00">
                         <input type="hidden" name="idVerbo" value="<?php echo $idVerb;?>">
                         <input type="submit" class="formSubmit" name="aceptar" value="ACCEPT">
                 </form>
@@ -103,7 +104,7 @@
                     <span>+</span>
                     <ul>
                         <li><h2>DO YOU WANT TO GIVE UP?</h2></li>
-                        <li><a href="resultados.php">SURRENDER</a></li>
+                        <li><a onclick="surrenderAct();">SURRENDER</a></li>
                     </ul>
                 </div>
 
@@ -136,15 +137,8 @@
 
     <!--Y ya podemos incluir otros scripts ;)-->
 
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
     <script src="./js/game.js"></script>
 
-
-    <script type="text/javascript">
-        window.time = cadena2;
-    </script>
-
-    <script src="./js/final.js"></script>
 
 
 

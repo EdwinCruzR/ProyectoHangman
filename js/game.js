@@ -107,6 +107,8 @@ function clic(e) {
         switch (intentos) {
             case 0:
                 document.querySelector(".legRH").style.visibility = "visible";
+                window.tiempo = document.getElementById("tiempo").innerHTML ;
+                document.getElementById("alTiempo").value = document.getElementById("tiempo").innerHTML;
                 frmL= document.getElementById("formularioGral");
                 frmL.submit();
                 // document.location.href='resultados.php';
@@ -222,11 +224,14 @@ function tem(){
     }, 1000);
 }
 
-
-
 function actionToggle() {
     const action = document.querySelector('.action');
     action.classList.toggle('active')
+}
+
+function surrenderAct() {
+    frmL= document.getElementById("formularioGral");
+    frmL.submit();
 }
 
 function fin(){
