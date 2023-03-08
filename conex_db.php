@@ -1,7 +1,7 @@
 <?php 
     $host = "localhost";
     $dbuser = "root";
-    $dbpassword = "";
+    $dbpassword = "cbtis150$";
     $dbname = "hangman";
 
     $conexion=mysqli_connect($host,$dbuser,$dbpassword,$dbname);

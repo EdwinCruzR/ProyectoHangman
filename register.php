@@ -16,7 +16,7 @@
     
             $host = "localhost";
             $dbuser = "root";
-            $dbpassword = "";
+            $dbpassword = "cbtis150$";
             $dbname = "hangman";
     
             $conn = new mysqli($host,$dbuser,$dbpassword,$dbname);
