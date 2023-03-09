@@ -1,4 +1,3 @@
-
 <?php 
 
     if(isset($_POST["registro"])){
@@ -122,10 +121,6 @@
                 <input type="password" spellcheck="false" name="password" required> 
                 <label>Contraseña</label>
             </div>
-            <!-- <div class="input-field">
-                <input type="password" id="contra2" spellcheck="false" required> 
-                <label>Confirma contraseña</label>
-            </div> -->
 
             <input type="submit" class="formSubmit" name="registro" value="Resgistrar">
         </div>
@@ -135,10 +130,6 @@
     <div class="bRegresar">
         <a href="menu.html" class="btnBack">Regresar</a>
     </div>
-    <!-- <script>
-        if($('form').smockValidaEqualPass('form #contra1', 'form #contra2')){
-        }
-    </script> -->
 
 </body>
 </html>

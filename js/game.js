@@ -135,7 +135,7 @@ function clic(e) {
         wordARR.forEach(ltr => {
             if(e.target.id == ltr){
                 console.log("entro");
-                encontrado++; //aqui agregamos el numero de palabras encontradas
+                encontrado++;
                 arrdash[i] = ltr;
                 console.log (arrdash);
                 
