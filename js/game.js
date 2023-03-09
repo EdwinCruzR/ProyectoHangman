@@ -4,12 +4,12 @@ const figure = document.querySelectorAll('.figure-part');
 const showClue = document.querySelectorAll('.showClue');
 const showIntentos = document.querySelectorAll('.showTries');
 
-console.log("el id es:" + window.idDVerbo);
-console.log("el verbo es:" + window.verboBD);
-console.log("el tipo es:" + window.tipoVerb);
-console.log("el pista es:" + window.pistaVerb);
-console.log("el simple past es:" + window.simplePverb);
-console.log("el ejemplo es:" + window.ejempVerb);
+// console.log("el id es:" + window.idDVerbo);
+// console.log("el verbo es:" + window.verboBD);
+// console.log("el tipo es:" + window.tipoVerb);
+// console.log("el pista es:" + window.pistaVerb);
+// console.log("el simple past es:" + window.simplePverb);
+// console.log("el ejemplo es:" + window.ejempVerb);
 
 // const verbo = "run";
 // const verboPAST = "ran";
@@ -27,7 +27,7 @@ let cadenaClue = new String();
 let cadenaTop = new String();
 let cadenaIntentos = new String();
 let arrdash = wordSTR.replace(/./g, "_").split("");
-console.log(arrdash);
+// console.log(arrdash);
 
 // cadena = document.getElementById('showLines').innerHTML= " "+ arrdash;
 document.getElementById('showLines').innerHTML="";
@@ -59,9 +59,7 @@ function evaluar(letra) {
     for (let i = 0; i < wordSTR.length; i++) {
         if(wordARR[i] == letra){
             resto = false;
-            console.log(
-                "encontrado :D"
-            );
+            // console.log("encontrado :D");
         }
     }
     return resto;
@@ -134,10 +132,10 @@ function clic(e) {
         let i = 0;
         wordARR.forEach(ltr => {
             if(e.target.id == ltr){
-                console.log("entro");
+                // console.log("entro");
                 encontrado++;
                 arrdash[i] = ltr;
-                console.log (arrdash);
+                // console.log (arrdash);
                 
             }
             i++;

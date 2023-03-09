@@ -71,8 +71,8 @@
                     <h2 id = "showTries"></h2>
                 </div>
 
-                <!-- <form action="resultados.php" method="post" class="form" id="formularioGral" > -->
-                <form method="post" class="form" id="formularioGral" >
+                <form action="resultados.php" method="post" class="form" id="formularioGral" >
+                <!-- <form method="post" class="form" id="formularioGral" > -->
                         <div class="input-verb-i" >
                             <label class="containerC1">
                                 <input type="radio" id="check1" checked="checked" name="typeVerb" value="R" class="check1" required>
