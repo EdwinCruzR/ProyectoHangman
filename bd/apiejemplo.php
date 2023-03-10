@@ -4,24 +4,33 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: access");
 header("Access-Control-Allow-Methods: GET,POST");
 header("Content-Type: application/json; charset=UTF-8");
-//header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+include("conexion.php");
 
-$servidor = "65.99.225.56";
-$usuario = "cbtised3_hangman";
-$contrasenia      = "vGVWQ_Ljlm*K";
-$nombreBaseDatos = "cbtised3_hangman";
+//* Lectura de todos los usuarios
+if (isset($_GET["usrLeer"])) {
+    $query = "SELECT * FROM users ORDER by lastname, name ASC";
+    $sqlUsuarios = mysqli_query($conexion, $query);
+    if (mysqli_num_rows($sqlUsuarios) > 0) {
+        $listaUsuarios = mysqli_fetch_all($sqlUsuarios, MYSQLI_ASSOC);
+        echo json_encode($listaUsuarios);
+    } else {
+        echo json_encode([["success" => 0]]);
+    }
+}
 
-$conexion = new mysqli($servidor, $usuario, $contrasenia, $nombreBaseDatos);
-
-
-// Test de lectura de todos los usuarios
-$query = "SELECT * FROM users ORDER by lastname ASC";
-$sqlUsuarios = mysqli_query($conexion, $query);
-if (mysqli_num_rows($sqlUsuarios) > 0) {
-    $listaUsuarios = mysqli_fetch_all($sqlUsuarios, MYSQLI_ASSOC);
-    echo json_encode($listaUsuarios);
-} else {
-    echo json_encode([["success" => 0]]);
+//* Devuelve un timestamp del servidor, generado en la base de datos
+if (isset($_GET["timestamp"])) {
+    $sqlInsert = mysqli_query($conexion, "INSERT INTO timestamps (observ) VALUES('test')");
+    $sqlSelect = mysqli_query($conexion, "SELECT * FROM timestamps");
+    if (mysqli_num_rows($sqlSelect) > 0) {
+        $timestamp = mysqli_fetch_all($sqlSelect, MYSQLI_ASSOC);
+        $sqlTruncate = mysqli_query($conexion, "TRUNCATE TABLE timestamps");
+        echo json_encode($timestamp);
+    } else {
+        echo json_encode(["success" => 0]);
+    }
+    exit();
 }
 
 
@@ -77,4 +86,3 @@ if (isset($_GET["leer"])) {
     }
 }
  */
-?>

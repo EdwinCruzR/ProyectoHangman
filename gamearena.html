@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Jugar en Arena</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="./assets/bootstrap/themes/sketchy/bootstrap.css" rel="stylesheet">
+    <!-- CSS propios -->
+    <link rel="stylesheet" href="./assets/css/gamearena.css">
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="./assets/bootstrap/js/bootstrap.bundle.js"></script>
+</head>
+
+<body>
+    
+    <header>
+        <!-- place navbar here -->
+    </header>
+    <main>
+        <!-- Modal trigger button -->
+        
+        <!-- Modal Body -->
+        <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+        <div class="modal fade" id="modalResult" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitleId">Resultado</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="table-responsive">
+                            <table class="table table-primary">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Dato</th>
+                                        <th scope="col">Valor</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody id="resultTabla">
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="hangmanApp.valida();">Ok</button>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+       
+        <div class="container">
+            <!-- <div class="row justify-content-center align-items-center"> -->
+            <div class="row align-items-center">
+                <!-- <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 my-3"> -->
+                <div class="col">
+                    Vidas: <span class="spanVidas"></span>
+                </div>
+                <div class="col">
+                    Intentos: <span class="spanIntentos"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 text-center">
+                    <span class="spanVerbo">
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 text-center">
+                    <span class="spanPista">
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12" id="divHangman">
+                    <img id="img1" src="./img/baseH.png" width="400" height="200">
+                    <img id="img2" src="./img/head.png" width="400" height="200" class="oculto">
+                    <img id="img3" src="./img/body.png" width="400" height="200" class="oculto">
+                    <img id="img4" src="./img/ArmL.png" width="400" height="200" class="oculto">
+                    <img id="img5" src="./img/ArmR.png" width="400" height="200" class="oculto">
+                    <img id="img6" src="./img/LegL.png" width="400" height="200" class="oculto">
+                    <img id="img7" src="./img/LegR.png" width="400" height="200" class="oculto">
+                </div>
+            </div>
+            <div class="row">
+                <div id="divBotones" class="col-12 text-center">
+
+                </div>
+            </div>
+            <div class="row oculto">
+                <div id="divAdivinaPasadoTipo" class="col-12">
+                    <form action="javascript:void(0);" method="post" class="form"
+                        onsubmit="hangmanApp.revisarPasado();">
+                        <label class="form-label">Selecciona el tipo de verbo: </label>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="radio" name="tipoV" id="regular" value="r" checked>
+                            <label class="form-check-label" for="regular">
+                                Regular
+                            </label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="radio" name="tipoV" id="irregular" value="i">
+                            <label class="form-check-label" for="irregular">
+                                Irregular
+                            </label>
+                        </div>
+                        <div class="mb-2">
+
+                            <input type="text" class="form-control" name="txtPasado" id="txtPasado"
+                                aria-describedby="helpId" placeholder="Simple past">
+                            <small id="helpId" class="form-text text-muted"></small>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" name="btnSubmit" id="btnSubmit"
+                                class="btn btn-primary">Enviar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+    <footer>
+        <!-- place footer here -->
+    </footer>
+
+    <script>
+        const modalResult = new bootstrap.Modal(document.getElementById("modalResult"));
+        var hangmanApp = new function () {
+            this.verbos = new Array();
+            this.spanVidas = document.querySelector('.spanVidas');
+            this.spanIntentos = document.querySelector('.spanIntentos');
+            this.spanVerbo = document.querySelector('.spanVerbo');
+            this.spanPista = document.querySelector('.spanPista');
+            this.divHangman = document.getElementById('divHangman');
+            this.divBotones = document.getElementById('divBotones');
+            this.divAdivinaPasadoTipo = document.getElementById('divAdivinaPasadoTipo');
+            this.resultTabla = document.getElementById('resultTabla');
+            this.verboJuega = null;
+            
+            this.pasadoUsr = document.getElementById('txtPasado');
+            this.tipoUsr = document.getElementsByName("tipoV");
+            
+            this.vidas = 3;
+            this.pistaDespuesDe = 3;
+            this.errores = 0;
+            this.aciertos = 0;
+            this.adivinada = false;
+            this.intentos = 6;
+            this.verboDashes = new Array();
+            this.verboArray = new Array();
+            this.urlApiWords = "./bd/apiwords.php";
+            this.randomKey = (max) => {
+                return Math.floor(Math.random() * max);
+            }
+            this.leerVerbos = () => {
+                /* var datos = ""; */
+                fetch(this.urlApiWords + "?wrdLeer=1")
+                    .then(respuesta => respuesta.json())
+                    .then((respuesta) => {
+                        respuesta.map(
+                            function (palabra, index, array) {
+                                hangmanApp.verbos.push(palabra);
+                            }
+                        );
+                    })
+                    .then(respuesta => {
+                        this.iniciar();
+                    })
+                    .catch(console.log());
+            };
+            this.seleccionaVerbo = () => {
+                let n = hangmanApp.verbos.length;
+                let key = this.randomKey(n);
+                verbo = hangmanApp.verbos[key];
+                hangmanApp.verbos.splice(key, 1);
+                return verbo;
+            };
+            this.iniciar = () => {
+                document.getElementById("img7").style.visibility = "hidden";
+                document.getElementById("img6").style.visibility = "hidden";
+                document.getElementById("img5").style.visibility = "hidden";
+                document.getElementById("img4").style.visibility = "hidden";
+                document.getElementById("img3").style.visibility = "hidden";
+                document.getElementById("img2").style.visibility = "hidden";
+                
+                hangmanApp.verboJuega = this.seleccionaVerbo();
+
+                resultado = "<tr>"+
+                           "<td>Verbo:</td>" +
+                           "<td>"+this.verboJuega["word"].toLowerCase()+"</td>" +
+                        "</tr>"+
+                        "<tr>" +
+                            "<td>Tipo:</td>"+
+                            "<td>"+((this.verboJuega["type"].toLowerCase()=="r")?"regular":"irregular")+"</td>" +
+                        "</tr>" +
+                        "<tr>" +
+                            "<td>Pasado:</td>"+
+                            "<td>"+this.verboJuega["simplepast"].toLowerCase()+"</td>" +
+                        "</tr>"+
+                        "<tr>" +
+                            "<td>Ejemplo:</td>"+
+                            "<td>"+this.verboJuega["example"].toLowerCase()+"</td>" +
+                        "</tr>";
+            this.resultTabla.innerHTML = resultado;
+
+                console.log(hangmanApp.verboJuega["word"]);
+                hangmanApp.errores = 0;
+                hangmanApp.aciertos = 0;
+                hangmanApp.adivinada = false;
+                hangmanApp.intentos = 6;
+                hangmanApp.spanIntentos.innerHTML = hangmanApp.intentos;
+                hangmanApp.spanVidas.innerHTML = "♥".repeat(hangmanApp.vidas);
+                hangmanApp.verboArray = hangmanApp.verboJuega["word"].split("");
+                hangmanApp.verboDashes = [].concat(hangmanApp.verboArray);
+                hangmanApp.verboDashes.fill("_");
+                hangmanApp.spanVerbo.innerHTML = "";
+                hangmanApp.verboDashes.forEach(car => {
+                    hangmanApp.spanVerbo.innerHTML += car + "   ";
+                });
+                hangmanApp.spanPista.classList.add("oculto");
+                hangmanApp.spanPista.classList.add("quitar");
+                hangmanApp.spanPista.innerHTML = verbo["clue"];
+                this.crearBotones();
+                hangmanApp.divBotones.classList.remove("quitar");
+                hangmanApp.divAdivinaPasadoTipo.classList.remove("quitar");
+                hangmanApp.divAdivinaPasadoTipo.classList.remove("visible");
+                hangmanApp.divAdivinaPasadoTipo.classList.add("oculto");
+            };
+            this.crearBotones = () => {
+                let contenedor = document.getElementById("divBotones");
+                contenedor.innerHTML = "";
+                let alfabeto = new String("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+                let alfabetoArr = alfabeto.split('');
+                alfabetoArr.forEach(letra => {
+                    let boton = document.createElement("input");
+                    boton.type = "button";
+                    boton.id = letra;
+                    boton.value = letra;
+                    boton.className = "botonLetra";
+                    //* Se programa el evento clic de cada botón
+                    boton.onclick = function (e) {
+                        if (hangmanApp.verboArray.includes(e.target.id)) {
+                            let ind = 0;
+                            hangmanApp.verboArray.forEach(car => {
+                                if (car == e.target.id) {
+                                    hangmanApp.verboDashes[ind] = car;
+                                    hangmanApp.aciertos++;
+                                }
+                                ind++;
+                            });
+                            hangmanApp.spanVerbo.innerHTML = "";
+                            hangmanApp.verboDashes.forEach(car => {
+                                hangmanApp.spanVerbo.innerHTML += car + "   ";
+                            });
+                            if (hangmanApp.aciertos == hangmanApp.verboArray.length) {
+                                hangmanApp.adivinarPasado();
+                            }
+                        } else {
+                            hangmanApp.intentos--;
+                            hangmanApp.errores++;
+                            hangmanApp.spanIntentos.innerHTML = hangmanApp.intentos;
+                            switch (hangmanApp.intentos) {
+                                case 0:
+                                    document.getElementById("img7").style.visibility = "visible";
+                                    break;
+                                case 1:
+                                    document.getElementById("img6").style.visibility = "visible";
+                                    break;
+                                case 2:
+                                    document.getElementById("img5").style.visibility = "visible";
+                                    break;
+                                case 3:
+                                    document.getElementById("img4").style.visibility = "visible";
+                                    break;
+                                case 4:
+                                    document.getElementById("img3").style.visibility = "visible";
+                                    break;
+                                case 5:
+                                    document.getElementById("img2").style.visibility = "visible";
+                                    break;
+                            }
+                            if (hangmanApp.errores == hangmanApp.pistaDespuesDe) {
+                                hangmanApp.spanPista.classList.remove("quitar");
+                                hangmanApp.spanPista.classList.remove("oculto");
+                                hangmanApp.spanPista.classList.add("visible");
+                            }
+                            if (hangmanApp.errores == 6) {
+                                hangmanApp.vidas--;
+                                if (hangmanApp.vidas == 0) {
+                                    hangmanApp.perdio();
+                                    //hangmanApp.terminar();
+                                } else {
+                                    hangmanApp.perdio();
+                                    //hangmanApp.iniciar();
+                                }
+                            }
+                        }
+                        let borraboton = document.getElementById(e.target.id);
+                        divBotones.removeChild(borraboton);
+                    };
+                    contenedor.appendChild(boton);
+                });
+            }
+            this.adivinarPasado = () => {
+                var verbo = hangmanApp.verboJuega["word"];
+                hangmanApp.divBotones.classList.add("quitar");
+                document.getElementById("helpId").innerHTML = "Escribe el pasado simple del verbo " + verbo.toLowerCase();
+                hangmanApp.divAdivinaPasadoTipo.classList.remove("oculto");
+                hangmanApp.divAdivinaPasadoTipo.classList.add("visible");
+            };
+
+            this.revisarPasado = () => {
+                hangmanApp.divAdivinaPasadoTipo.classList.add("quitar");
+                tipoOk = hangmanApp.verboJuega["type"].toLowerCase();
+                pasadoOk = hangmanApp.verboJuega["simplepast"].toLowerCase();
+                pasadoTest = this.pasadoUsr.value.toLowerCase();
+                for (var i = 0; i < this.tipoUsr.length; i++) {
+                    if (this.tipoUsr[i].checked) {
+                        tipoTest = this.tipoUsr[i].value;
+                        break;
+                    }
+                }
+                if (tipoTest === tipoOk && pasadoTest === pasadoOk) {
+                    hangmanApp.gano();
+                } else {
+                    this.vidas--;
+                    hangmanApp.perdio();
+                }
+                
+            };
+            this.terminar = () => {
+                window.location = "index.html";
+            }
+            this.gano = () => {
+                document.getElementById("modalTitleId").innerHTML = "¡Correcto :) !";
+                modalResult.show();
+                
+            };
+            this.perdio = () => {
+                document.getElementById("modalTitleId").innerHTML = "¡Incorrecto :( !";
+                //document.getElementById("resultadoTexto").innerHTML = "¡Incorrecto!";
+                modalResult.show();
+                
+            };
+
+            this.valida=() => {
+                if(this.vidas == 0) this.terminar();
+                else this.iniciar();
+            };
+        }
+        hangmanApp.leerVerbos();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+* {
+    font-size: large;
+}
+.spanVidas{
+    font-size: 1.6rem;
+    color: brown;
+}
+.spanVerbo{
+    font-size: 1.6rem;
+}
+
+.spanPista{
+    font-size: 1.3rem;
+    color:blue;
+}
+
+.oculto {
+    visibility: hidden;
+}
+
+.quitar {
+    display: none;
+}
+
+.poner {
+    display: block;
+}
+
+.visible {
+    visibility: visible;
+}
+
+#divHangman{
+    position: relative;
+    display: flex;
+    height: 30vh;
+}
+
+#divHangman img{
+    position: absolute;
+    fill: transparent;
+}
+
+.botonLetra {
+    width: calc(1.9em);
+    border-radius: 70%;
+}
+.botonLetra:hover {
+    
+    background-color: coral;
+}
