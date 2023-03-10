@@ -97,7 +97,6 @@
                         <input type="submit" class="formSubmit" name="aceptar" value="ACCEPT">
                 </form>
 
-
                 <div id="divbtns" class="divbtns">
                 
                 </div>
