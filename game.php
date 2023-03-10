@@ -6,6 +6,8 @@
 
         $vidas = 3;
 
+        # RRM nuevo comentario prueba
+
         # code...
         # se importa el verbo
         $numFilas =mysqli_num_rows($resultado);
