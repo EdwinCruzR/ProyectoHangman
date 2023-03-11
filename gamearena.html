@@ -16,21 +16,30 @@
 </head>
 
 <body>
-    
+
     <header>
         <!-- place navbar here -->
     </header>
     <main>
+        <div id="loading" class="row justify-content-center align-items-center g-2" style="height: 50vh;">
+            <div  class="spinner-border text-success" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+
+
+
         <!-- Modal trigger button -->
-        
+
         <!-- Modal Body -->
         <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-        <div class="modal fade" id="modalResult" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+        <div class="modal fade" id="modalResult" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+            role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalTitleId">Resultado</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="table-responsive">
@@ -39,26 +48,27 @@
                                     <tr>
                                         <th scope="col">Dato</th>
                                         <th scope="col">Valor</th>
-                                        
+
                                     </tr>
                                 </thead>
                                 <tbody id="resultTabla">
                                 </tbody>
                             </table>
                         </div>
-                        
+
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="hangmanApp.valida();">Ok</button>
-                        
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                            onclick="hangmanApp.valida();">Ok</button>
+
                     </div>
                 </div>
             </div>
         </div>
-        
-        
-       
-        <div class="container">
+
+
+
+        <div class="container oculto" id="divPrincipal">
             <!-- <div class="row justify-content-center align-items-center"> -->
             <div class="row align-items-center">
                 <!-- <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 my-3"> -->
@@ -128,7 +138,7 @@
                     </form>
                 </div>
             </div>
-            
+
         </div>
     </main>
     <footer>
@@ -148,10 +158,8 @@
             this.divAdivinaPasadoTipo = document.getElementById('divAdivinaPasadoTipo');
             this.resultTabla = document.getElementById('resultTabla');
             this.verboJuega = null;
-            
             this.pasadoUsr = document.getElementById('txtPasado');
             this.tipoUsr = document.getElementsByName("tipoV");
-            
             this.vidas = 3;
             this.pistaDespuesDe = 3;
             this.errores = 0;
@@ -161,11 +169,12 @@
             this.verboDashes = new Array();
             this.verboArray = new Array();
             this.urlApiWords = "./bd/apiwords.php";
+
             this.randomKey = (max) => {
                 return Math.floor(Math.random() * max);
             }
+
             this.leerVerbos = () => {
-                /* var datos = ""; */
                 fetch(this.urlApiWords + "?wrdLeer=1")
                     .then(respuesta => respuesta.json())
                     .then((respuesta) => {
@@ -180,6 +189,7 @@
                     })
                     .catch(console.log());
             };
+
             this.seleccionaVerbo = () => {
                 let n = hangmanApp.verbos.length;
                 let key = this.randomKey(n);
@@ -187,6 +197,7 @@
                 hangmanApp.verbos.splice(key, 1);
                 return verbo;
             };
+
             this.iniciar = () => {
                 document.getElementById("img7").style.visibility = "hidden";
                 document.getElementById("img6").style.visibility = "hidden";
@@ -194,27 +205,7 @@
                 document.getElementById("img4").style.visibility = "hidden";
                 document.getElementById("img3").style.visibility = "hidden";
                 document.getElementById("img2").style.visibility = "hidden";
-                
                 hangmanApp.verboJuega = this.seleccionaVerbo();
-
-                resultado = "<tr>"+
-                           "<td>Verbo:</td>" +
-                           "<td>"+this.verboJuega["word"].toLowerCase()+"</td>" +
-                        "</tr>"+
-                        "<tr>" +
-                            "<td>Tipo:</td>"+
-                            "<td>"+((this.verboJuega["type"].toLowerCase()=="r")?"regular":"irregular")+"</td>" +
-                        "</tr>" +
-                        "<tr>" +
-                            "<td>Pasado:</td>"+
-                            "<td>"+this.verboJuega["simplepast"].toLowerCase()+"</td>" +
-                        "</tr>"+
-                        "<tr>" +
-                            "<td>Ejemplo:</td>"+
-                            "<td>"+this.verboJuega["example"].toLowerCase()+"</td>" +
-                        "</tr>";
-            this.resultTabla.innerHTML = resultado;
-
                 console.log(hangmanApp.verboJuega["word"]);
                 hangmanApp.errores = 0;
                 hangmanApp.aciertos = 0;
@@ -237,7 +228,10 @@
                 hangmanApp.divAdivinaPasadoTipo.classList.remove("quitar");
                 hangmanApp.divAdivinaPasadoTipo.classList.remove("visible");
                 hangmanApp.divAdivinaPasadoTipo.classList.add("oculto");
+                document.getElementById("loading").style.display = "none";
+                document.getElementById("divPrincipal").classList.remove("oculto");
             };
+
             this.crearBotones = () => {
                 let contenedor = document.getElementById("divBotones");
                 contenedor.innerHTML = "";
@@ -297,13 +291,14 @@
                                 hangmanApp.spanPista.classList.add("visible");
                             }
                             if (hangmanApp.errores == 6) {
+                                hangmanApp.creaFeedback();
                                 hangmanApp.vidas--;
                                 if (hangmanApp.vidas == 0) {
                                     hangmanApp.perdio();
-                                    //hangmanApp.terminar();
+
                                 } else {
                                     hangmanApp.perdio();
-                                    //hangmanApp.iniciar();
+
                                 }
                             }
                         }
@@ -332,13 +327,14 @@
                         break;
                     }
                 }
+                hangmanApp.creaFeedback();
                 if (tipoTest === tipoOk && pasadoTest === pasadoOk) {
                     hangmanApp.gano();
                 } else {
                     this.vidas--;
                     hangmanApp.perdio();
                 }
-                
+
             };
             this.terminar = () => {
                 window.location = "index.html";
@@ -346,18 +342,38 @@
             this.gano = () => {
                 document.getElementById("modalTitleId").innerHTML = "¡Correcto :) !";
                 modalResult.show();
-                
+
             };
             this.perdio = () => {
                 document.getElementById("modalTitleId").innerHTML = "¡Incorrecto :( !";
                 //document.getElementById("resultadoTexto").innerHTML = "¡Incorrecto!";
                 modalResult.show();
-                
+
             };
 
-            this.valida=() => {
-                if(this.vidas == 0) this.terminar();
+            this.valida = () => {
+                if (this.vidas == 0) this.terminar();
                 else this.iniciar();
+            };
+
+            this.creaFeedback = () => {
+                resultado = "<tr>" +
+                    "<td>Verbo:</td>" +
+                    "<td>" + this.verboJuega["word"].toLowerCase() + "</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                    "<td>Tipo:</td>" +
+                    "<td>" + ((this.verboJuega["type"].toLowerCase() == "r") ? "regular" : "irregular") + "</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                    "<td>Pasado:</td>" +
+                    "<td>" + this.verboJuega["simplepast"].toLowerCase() + "</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                    "<td>Ejemplo:</td>" +
+                    "<td>" + this.verboJuega["example"].toLowerCase() + "</td>" +
+                    "</tr>";
+                this.resultTabla.innerHTML = resultado;
             };
         }
         hangmanApp.leerVerbos();
