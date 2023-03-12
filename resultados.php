@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,23 +8,24 @@
     <title>Resultados</title>
     <link rel="stylesheet" href="./css/final.css">
 </head>
+
 <body onload=deshabilitaRetroceso()>
 
-<?php
+    <?php
 
     include("conex_db.php");
 
-    if(!empty($_POST['idVerbo'])){
+    if (!empty($_POST['idVerbo'])) {
         $tiempo = $_POST['alTiempo'];
         // echo $tiempo;
         $verboId = $_POST['idVerbo'];
-        $tipoVerbo = isset($_POST['typeVerb']) ? $_POST['typeVerb'] : 0 ;
-        $verboSimple =isset($_POST['pastverb']) ? mb_strtoupper(trim($_POST['pastverb'])) : 0 ;
+        $tipoVerbo = isset($_POST['typeVerb']) ? $_POST['typeVerb'] : 0;
+        $verboSimple = isset($_POST['pastverb']) ? mb_strtoupper(trim($_POST['pastverb'])) : 0;
         // $uLose = (int)$_POST['lose'];
 
-        $resultado2=mysqli_query($conexion,"SELECT * FROM word WHERE id = '$verboId'");
+        $resultado2 = mysqli_query($conexion, "SELECT * FROM words WHERE id = '$verboId'");
 
-        while($consultaVerb =  mysqli_fetch_array($resultado2)){
+        while ($consultaVerb =  mysqli_fetch_array($resultado2)) {
             $idVerb = $consultaVerb['id'];
             $verbo = $consultaVerb['word'];
             $tipo = $consultaVerb['type'];
@@ -33,171 +35,182 @@
         }
         // echo " = ".$simplePast;
 
-            if($tipo == $tipoVerbo && $verboSimple == $simplePast){
-                winner($verbo,$tipo,$simplePast,$ejemplo,$tiempo);
-            } else{
-                losser($verbo,$tipo,$simplePast,$ejemplo,$tiempo);
-            }
-        
-    } else{
+        if ($tipo == $tipoVerbo && $verboSimple == $simplePast) {
+            winner($verbo, $tipo, $simplePast, $ejemplo, $tiempo);
+        } else {
+            losser($verbo, $tipo, $simplePast, $ejemplo, $tiempo);
+        }
+    } else {
 
-        echo "error"; 
-        ?>
+        echo "error";
+    ?>
         <script>
             console.log("error");
             // document.location.href='index.html';
         </script>
-        <?php 
+    <?php
     }
 
 
 
-    function losser($verbo,$tipoVerb,$simplePas,$ejemplo,$tiempo){
-        ?>
-            <div class="conteiner">
-            <div class="content">
+    function losser($verbo, $tipoVerb, $simplePas, $ejemplo, $tiempo)
+    {
+    ?>
 
-                <div class= "reswin">
-                    <div class = "loswin">
+        <div class="conteiner">
+            <div class="content">
+                <div class="reswin">
+                    <div class="loswin">
                         <h1 id="youLose">YOU LOSE</h1>
                     </div>
                 </div>
-                <div class= "tx1">
-                    <p>Verbo: 
-                    <?php 
+                <div class="tx1">
+                    <p>Verbo:
+                        <?php
                         echo $verbo;
-                    ?>
+                        ?>
                     </p>
                 </div>
-                <div class= "tx4">
-                    <p>Tipo de verbo: 
-                    <?php 
-                        if($tipoVerb == "I"){
+                <div class="tx4">
+                    <p>Tipo de verbo:
+                        <?php
+                        if ($tipoVerb == "I") {
                             echo "IRREGULAR";
-                        }else{
+                        } else {
                             echo "REGULAR";
                         }
-                    ?>
+                        ?>
                     </p>
                 </div>
-                <div class= "tx5">
-                    <p>Verbo en pasado simple: 
-                    <?php 
+                <div class="tx5">
+                    <p>Verbo en pasado simple:
+                        <?php
                         echo $simplePas;
-                    ?>
+                        ?>
                     </p>
                 </div>
-                <div class= "tx5">
-                    <p>Ejemplo: 
-                    <?php 
+                <div class="tx5">
+                    <p>Ejemplo:
+                        <?php
                         echo $ejemplo;
-                    ?>
+                        ?>
                     </p>
                 </div>
 
-                <div class= "tx2">
+                <div class="tx2">
                     <p>Tu tiempo:
-                    <?php 
+                        <?php
                         echo $tiempo;
-                    ?>
+                        ?>
                     </p>
+                </div> <br>
+                <div class="action" onclick="actionToggle();">
+                    <span>+</span>
+                    <ul>
+                        <li>
+                            <h6>¿Qué deseas hacer?</h6>
+                        </li>
+                        <li><a href="game.php">Nuevo juego</a></li>
+                        <li><a href="index.html">Terminar</a></li>
+                    </ul>
                 </div>
-                
+            </div>
 
-            </div>
-            <div class="statistics">
+
+        </div>
+        <!-- <div class="statistics">
                 <h1>Statistics</h1>
-            </div>
-            
-        </div>
-        <div class="action" onclick="actionToggle();">
-            <span>+</span>
-            <ul>
-                <li><h2>DO YOU WANT TO GO BACK TO THE MENU?</h2></li>
-                <li><a href="start.html">RETURN</a></li>
-            </ul>
-        </div>
-        <?php
+            </div> -->
+
+
+    <?php
     }
 
 
-    function winner($verbo,$tipoVerb,$simplePas,$ejemplo,$tiempo)
-        {
-            ?>
-            <div class="conteiner">
-                <div class="content">
+    function winner($verbo, $tipoVerb, $simplePas, $ejemplo, $tiempo)
+    {
+    ?>
 
-                    <div class= "reswin">
-                        <div class = "loswin">
-                            <h1 id="youWin">YOU WIN</h1>
-                        </div>
+        <div class="conteiner">
+            <div class="content">
+                <div class="reswin">
+                    <div class="loswin">
+                        <h1 id="youWin">YOU WIN</h1>
                     </div>
-                    <div class= "tx1">
-                        <p>Verbo: 
-                        <?php 
-                            echo $verbo;
+                </div>
+                <div class="tx1">
+                    <p>Verbo:
+                        <?php
+                        echo $verbo;
                         ?>
-                        </p>
-                    </div>
-                    <div class= "tx4">
-                        <p>Tipo de verbo: 
-                        <?php 
-                            if($tipoVerb == "I"){
-                                echo "IRREGULAR";
-                            }else{
-                                echo "REGULAR";
-                            }
-                        ?>
-                        </p>
-                    </div>
-                    <div class= "tx5">
-                        <p>Verbo en pasado simple: 
-                        <?php 
-                            echo $simplePas;
-                        ?>
-                        </p>
-                    </div>
-
-                    <div class= "tx5">
-                    <p>Ejemplo: 
-                    <?php 
-                        echo $ejemplo;
-                    ?>
                     </p>
-                    </div>
-
-                    <div class= "tx2">
-                        <p>Tu tiempo:
-                        <?php 
-                            echo $tiempo;
+                </div>
+                <div class="tx4">
+                    <p>Tipo de verbo:
+                        <?php
+                        if ($tipoVerb == "I") {
+                            echo "IRREGULAR";
+                        } else {
+                            echo "REGULAR";
+                        }
                         ?>
-                        </p>
-                    </div>
-                    <!-- <div  class= "tiempo">
+                    </p>
+                </div>
+                <div class="tx5">
+                    <p>Verbo en pasado simple:
+                        <?php
+                        echo $simplePas;
+                        ?>
+                    </p>
+                </div>
+
+                <div class="tx5">
+                    <p>Ejemplo:
+                        <?php
+                        echo $ejemplo;
+                        ?>
+                    </p>
+                </div>
+
+                <div class="tx2">
+                    <p>Tu tiempo:
+                        <?php
+                        echo $tiempo;
+                        ?>
+                    </p>
+                </div> <br>
+                <!-- <div  class= "tiempo">
                         <p id="showTime">Nuevo record: 0 </p>
                     </div>
                     <div class= "tx6"><p>Anterior record: 0</p></div> -->
-
+                <div class="action" onclick="actionToggle();">
+                    <span>+</span>
+                    <ul>
+                        <li>
+                            <h6>¿Qué deseas hacer?</h6>
+                        </li>
+                        <li><a href="game.php">Nuevo juego</a></li>
+                        <li><a href="index.html">Terminar</a></li>
+                    </ul>
                 </div>
-                <div class="statistics">
-                    <h1>Statistics</h1>
-                </div>
-                
             </div>
-            <div class="action" onclick="actionToggle();">
-                <span>+</span>
-                <ul>
-                    <li><h2>DO YOU WANT TO GO BACK TO THE MENU?</h2></li>
-                    <li><a href="start.html">RETURN</a></li>
-                </ul>
-            </div>
-            <?php
-
-        }
 
 
-?>
-    <script src="./js/final.js" ></script>
-    
+        </div>
+        <!-- <div class="statistics">
+                <h1>Statistics</h1>
+            </div> -->
+
+
+
+    <?php
+
+    }
+
+
+    ?>
+    <script src="./js/final.js"></script>
+
 </body>
+
 </html>

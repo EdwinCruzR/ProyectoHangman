@@ -77,7 +77,7 @@ include("conex_db.php");
 
     <form method="post" class="form" >
         <h2 class="formTitle">Inicia Sesión</h2>
-        <p class="formParagraph">¿Aún no tiene una cuenta? <a href="register.html" class="formLink">Registrate</a></p>
+        <p class="formParagraph">¿Aún no tiene una cuenta? <a href="register.php" class="formLink">Registrate</a></p>
         <div class="formContainer">
             <div class="input-field">
                 <input type="email" name="email" required>
@@ -97,7 +97,7 @@ include("conex_db.php");
 
 
     <div class="bRegresar">
-        <a href="menu.html" class="btnBack">Regresar</a>
+        <a href="index.html" class="btnBack">Regresar</a>
     </div>
 
 </body>

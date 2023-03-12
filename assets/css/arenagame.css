@@ -10,8 +10,13 @@
 }
 
 .spanPista{
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     color:blue;
+}
+.spanPuntos{
+    font-size: 1.2rem;
+    color:blue;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .oculto {

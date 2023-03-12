@@ -8,7 +8,6 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 include("conexion.php");
 
-
 //* Lectura de todos los verbos
 if (isset($_GET["wrdLeer"])) {
     $query = "SELECT * FROM words ORDER by word ASC";

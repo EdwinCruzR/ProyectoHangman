@@ -1,16 +1,15 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <title>Jugar en Arena</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- Bootstrap CSS v5.2.1 -->
     <link href="./assets/bootstrap/themes/sketchy/bootstrap.css" rel="stylesheet">
     <!-- CSS propios -->
-    <link rel="stylesheet" href="./assets/css/gamearena.css">
+    <link rel="stylesheet" href="./assets/css/arenagame.css">
     <!-- Bootstrap JavaScript Libraries -->
     <script src="./assets/bootstrap/js/bootstrap.bundle.js"></script>
 </head>
@@ -20,17 +19,39 @@
     <header>
         <!-- place navbar here -->
     </header>
+
     <main>
         <div id="loading" class="row justify-content-center align-items-center g-2" style="height: 50vh;">
-            <div  class="spinner-border text-success" role="status">
+            <div class="spinner-border text-success" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>
         </div>
-
-
-
-        <!-- Modal trigger button -->
-
+        <!-- Modal Body -->
+        <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+        <div class="modal fade" id="modalNombre" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+            role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitleId">Jugador(a)</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-floating mb-3">
+                            <form action="javascript:void(0);" method="post" onsubmit="hangmanApp.aJugar();">
+                                <input required type="text" class="form-control" name="txtNombre" id="txtNombre"
+                                    placeholder="">
+                                <label for="formId1">Ingresa tu nombre</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                            onclick="window.location='index.html'">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">¡Jugar!</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         <!-- Modal Body -->
         <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
         <div class="modal fade" id="modalResult" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
@@ -38,8 +59,7 @@
             <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modalTitleId">Resultado</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title" id="modalTitleId2">Resultado</h5>
                     </div>
                     <div class="modal-body">
                         <div class="table-responsive">
@@ -48,26 +68,20 @@
                                     <tr>
                                         <th scope="col">Dato</th>
                                         <th scope="col">Valor</th>
-
                                     </tr>
                                 </thead>
                                 <tbody id="resultTabla">
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
                             onclick="hangmanApp.valida();">Ok</button>
-
                     </div>
                 </div>
             </div>
         </div>
-
-
-
         <div class="container oculto" id="divPrincipal">
             <!-- <div class="row justify-content-center align-items-center"> -->
             <div class="row align-items-center">
@@ -75,8 +89,15 @@
                 <div class="col">
                     Vidas: <span class="spanVidas"></span>
                 </div>
-                <div class="col">
+                <!-- <div class="col">
                     Intentos: <span class="spanIntentos"></span>
+                </div> -->
+                <div class="col">
+                    Puntos: <span class="spanPuntos"></span>
+                </div>
+                <div class="col">
+                    <input name="btnRendirse" id="btnRendirse" class="btn btn-primary" type="button" value="Rendirse"
+                        onclick="hangmanApp.rendir();">
                 </div>
             </div>
             <div class="row">
@@ -93,18 +114,17 @@
             </div>
             <div class="row">
                 <div class="col-12" id="divHangman">
-                    <img id="img1" src="./img/baseH.png" width="400" height="200">
-                    <img id="img2" src="./img/head.png" width="400" height="200" class="oculto">
-                    <img id="img3" src="./img/body.png" width="400" height="200" class="oculto">
-                    <img id="img4" src="./img/ArmL.png" width="400" height="200" class="oculto">
-                    <img id="img5" src="./img/ArmR.png" width="400" height="200" class="oculto">
-                    <img id="img6" src="./img/LegL.png" width="400" height="200" class="oculto">
-                    <img id="img7" src="./img/LegR.png" width="400" height="200" class="oculto">
+                    <img id="img1" src="./assets/img/hangman/baseH.png" width="400" height="200">
+                    <img id="img2" src="./assets/img/hangman/head.png" width="400" height="200" class="oculto">
+                    <img id="img3" src="./assets/img/hangman/body.png" width="400" height="200" class="oculto">
+                    <img id="img4" src="./assets/img/hangman/ArmL.png" width="400" height="200" class="oculto">
+                    <img id="img5" src="./assets/img/hangman/ArmR.png" width="400" height="200" class="oculto">
+                    <img id="img6" src="./assets/img/hangman/LegL.png" width="400" height="200" class="oculto">
+                    <img id="img7" src="./assets/img/hangman/LegR.png" width="400" height="200" class="oculto">
                 </div>
             </div>
             <div class="row">
                 <div id="divBotones" class="col-12 text-center">
-
                 </div>
             </div>
             <div class="row oculto">
@@ -126,7 +146,7 @@
                         </div>
                         <div class="mb-2">
 
-                            <input type="text" class="form-control" name="txtPasado" id="txtPasado"
+                            <input type="text" class="form-control" name="txtPasado" id="txtPasado" autocomplete="off"
                                 aria-describedby="helpId" placeholder="Simple past">
                             <small id="helpId" class="form-text text-muted"></small>
                         </div>
@@ -138,37 +158,46 @@
                     </form>
                 </div>
             </div>
-
         </div>
     </main>
+
     <footer>
         <!-- place footer here -->
     </footer>
 
     <script>
+        const modalNombre = new bootstrap.Modal(document.getElementById('modalNombre'));
         const modalResult = new bootstrap.Modal(document.getElementById("modalResult"));
         var hangmanApp = new function () {
-            this.verbos = new Array();
             this.spanVidas = document.querySelector('.spanVidas');
-            this.spanIntentos = document.querySelector('.spanIntentos');
+            //! this.spanIntentos = document.querySelector('.spanIntentos');
+            this.spanPuntos = document.querySelector('.spanPuntos');
+            this.spanPuntos.innerHTML = "0";
             this.spanVerbo = document.querySelector('.spanVerbo');
             this.spanPista = document.querySelector('.spanPista');
             this.divHangman = document.getElementById('divHangman');
             this.divBotones = document.getElementById('divBotones');
             this.divAdivinaPasadoTipo = document.getElementById('divAdivinaPasadoTipo');
             this.resultTabla = document.getElementById('resultTabla');
+            this.nombre = document.getElementById('txtNombre').value;
             this.verboJuega = null;
             this.pasadoUsr = document.getElementById('txtPasado');
             this.tipoUsr = document.getElementsByName("tipoV");
             this.vidas = 3;
             this.pistaDespuesDe = 3;
+            this.perdioLasVidas = false;
+            this.seRindio = false;
             this.errores = 0;
             this.aciertos = 0;
-            this.adivinada = false;
             this.intentos = 6;
+            this.verbos = new Array();
             this.verboDashes = new Array();
             this.verboArray = new Array();
+            this.datosjuego = new Array();
+            this.puntos = 0;
             this.urlApiWords = "./bd/apiwords.php";
+            this.urlApiGeneral = "./bd/apigeneral.php";
+            this.urlApiArena = "./bd/apiarena.php";
 
             this.randomKey = (max) => {
                 return Math.floor(Math.random() * max);
@@ -206,12 +235,10 @@
                 document.getElementById("img3").style.visibility = "hidden";
                 document.getElementById("img2").style.visibility = "hidden";
                 hangmanApp.verboJuega = this.seleccionaVerbo();
-                console.log(hangmanApp.verboJuega["word"]);
                 hangmanApp.errores = 0;
                 hangmanApp.aciertos = 0;
-                hangmanApp.adivinada = false;
                 hangmanApp.intentos = 6;
-                hangmanApp.spanIntentos.innerHTML = hangmanApp.intentos;
+                //hangmanApp.spanIntentos.innerHTML = hangmanApp.intentos;
                 hangmanApp.spanVidas.innerHTML = "♥".repeat(hangmanApp.vidas);
                 hangmanApp.verboArray = hangmanApp.verboJuega["word"].split("");
                 hangmanApp.verboDashes = [].concat(hangmanApp.verboArray);
@@ -251,6 +278,8 @@
                                 if (car == e.target.id) {
                                     hangmanApp.verboDashes[ind] = car;
                                     hangmanApp.aciertos++;
+                                    hangmanApp.puntos += 10;
+                                    hangmanApp.spanPuntos.innerHTML = hangmanApp.puntos;
                                 }
                                 ind++;
                             });
@@ -264,7 +293,9 @@
                         } else {
                             hangmanApp.intentos--;
                             hangmanApp.errores++;
-                            hangmanApp.spanIntentos.innerHTML = hangmanApp.intentos;
+                            hangmanApp.puntos -= 1;
+                            hangmanApp.spanPuntos.innerHTML = hangmanApp.puntos;
+                            //hangmanApp.spanIntentos.innerHTML = hangmanApp.intentos;
                             switch (hangmanApp.intentos) {
                                 case 0:
                                     document.getElementById("img7").style.visibility = "visible";
@@ -293,13 +324,7 @@
                             if (hangmanApp.errores == 6) {
                                 hangmanApp.creaFeedback();
                                 hangmanApp.vidas--;
-                                if (hangmanApp.vidas == 0) {
-                                    hangmanApp.perdio();
-
-                                } else {
-                                    hangmanApp.perdio();
-
-                                }
+                                hangmanApp.perdio();
                             }
                         }
                         let borraboton = document.getElementById(e.target.id);
@@ -308,6 +333,7 @@
                     contenedor.appendChild(boton);
                 });
             }
+
             this.adivinarPasado = () => {
                 var verbo = hangmanApp.verboJuega["word"];
                 hangmanApp.divBotones.classList.add("quitar");
@@ -328,31 +354,33 @@
                     }
                 }
                 hangmanApp.creaFeedback();
+
                 if (tipoTest === tipoOk && pasadoTest === pasadoOk) {
                     hangmanApp.gano();
+                    this.puntos += 15;
                 } else {
                     this.vidas--;
+                    this.puntos -= 10;
                     hangmanApp.perdio();
                 }
 
             };
-            this.terminar = () => {
-                window.location = "index.html";
-            }
+
             this.gano = () => {
-                document.getElementById("modalTitleId").innerHTML = "¡Correcto :) !";
+                document.getElementById("modalTitleId2").innerHTML = "¡Correcto :) !";
                 modalResult.show();
-
             };
-            this.perdio = () => {
-                document.getElementById("modalTitleId").innerHTML = "¡Incorrecto :( !";
-                //document.getElementById("resultadoTexto").innerHTML = "¡Incorrecto!";
-                modalResult.show();
 
+            this.perdio = () => {
+                document.getElementById("modalTitleId2").innerHTML = "¡Incorrecto :( !";
+                modalResult.show();
             };
 
             this.valida = () => {
-                if (this.vidas == 0) this.terminar();
+                if (this.vidas == 0) {
+                    this.perdioLasVidas = true;
+                    this.terminar();
+                }
                 else this.iniciar();
             };
 
@@ -371,12 +399,56 @@
                     "</tr>" +
                     "<tr>" +
                     "<td>Ejemplo:</td>" +
-                    "<td>" + this.verboJuega["example"].toLowerCase() + "</td>" +
+                    "<td>" + this.verboJuega["example"] + "</td>" +
                     "</tr>";
                 this.resultTabla.innerHTML = resultado;
             };
+
+            this.insertarJuego = async () => {
+                //var datosEnviar = { nombre: this.nombre.value, precio: this.precio.value }
+                var datosEnviar = { nombre: hangmanApp.nombre };
+                await fetch(this.urlApiArena + "?nuevo=1", { method: "POST", body: JSON.stringify(datosEnviar) })
+                    .then(respuesta => respuesta.json())
+                    .then((respuesta) => {
+                        this.datosjuego.push(respuesta);
+                    })
+                    .finally(respuesta => {
+                    })
+                    .catch(console.log);
+            };
+
+            this.terminar = async () => {
+                //window.location = "index.html";
+                idSend = hangmanApp.datosjuego[0][0]["id"];
+                rindioSend = (hangmanApp.seRindio) ? 1 : 0;
+                puntosSend = (hangmanApp.seRindio) ? 0 : this.puntos;
+
+                var datosEnviar = { id: idSend, puntos: puntosSend, rindio: rindioSend };
+                await fetch(this.urlApiArena + "?fin=1", { method: "POST", body: JSON.stringify(datosEnviar) })
+                    .then(respuesta => respuesta.json())
+                    .then((respuesta) => {
+                        window.location = "tablageneral.html";
+                    })
+                    .finally(respuesta => {
+                    })
+                    .catch(console.log);
+            }
+
+            this.aJugar = () => {
+                this.nombre = document.getElementById("txtNombre").value;
+                modalNombre.hide();
+                hangmanApp.insertarJuego();
+                hangmanApp.leerVerbos();
+            };
+
+            this.rendir = () => {
+                this.seRindio = confirm("¿De verdad deseas rendirte?");
+                if (this.seRindio) {
+                    this.terminar();
+                }
+            };
         }
-        hangmanApp.leerVerbos();
+        modalNombre.show();
     </script>
 </body>
 
