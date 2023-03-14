@@ -38,7 +38,7 @@
 #divHangman{
     position: relative;
     display: flex;
-    height: 30vh;
+    height: 210px;
 }
 
 #divHangman img{
@@ -53,12 +53,4 @@
 .botonLetra:hover {
 
     background-color: coral;
-}
-
-@media (max-height:680px){
-
-    #divHangman{
-        height: 210px;
-    }
-    
 }
