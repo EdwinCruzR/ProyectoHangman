@@ -113,7 +113,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-12" id="divHangman">
+                <div class="col-12 justify-content-center" id="divHangman">
                     <img id="img1" src="./assets/img/hangman/baseH.png" width="400" height="200">
                     <img id="img2" src="./assets/img/hangman/head.png" width="400" height="200" class="oculto">
                     <img id="img3" src="./assets/img/hangman/body.png" width="400" height="200" class="oculto">
@@ -129,8 +129,8 @@
             </div>
             <div class="row oculto">
                 <div id="divAdivinaPasadoTipo" class="col-12">
-                    <form action="javascript:void(0);" method="post" class="form"
-                        onsubmit="hangmanApp.revisarPasado();">
+                    <form action="javascript:void(0);" method="post" class="form" 
+                        onsubmit="hangmanApp.revisarPasado();" id="formulario">
                         <label class="form-label">Selecciona el tipo de verbo: </label>
                         <div class="form-check mb-2">
                             <input class="form-check-input" type="radio" name="tipoV" id="regular" value="r" checked>
@@ -335,6 +335,7 @@
             }
 
             this.adivinarPasado = () => {
+                
                 var verbo = hangmanApp.verboJuega["word"];
                 hangmanApp.divBotones.classList.add("quitar");
                 document.getElementById("helpId").innerHTML = "Escribe el pasado simple del verbo " + verbo.toLowerCase();
@@ -343,6 +344,7 @@
             };
 
             this.revisarPasado = () => {
+                let form=document.getElementById("formulario");
                 hangmanApp.divAdivinaPasadoTipo.classList.add("quitar");
                 tipoOk = hangmanApp.verboJuega["type"].toLowerCase();
                 pasadoOk = hangmanApp.verboJuega["simplepast"].toLowerCase();
@@ -363,7 +365,7 @@
                     this.puntos -= 10;
                     hangmanApp.perdio();
                 }
-
+                form.reset();
             };
 
             this.gano = () => {
@@ -447,6 +449,7 @@
                     this.terminar();
                 }
             };
+
         }
         modalNombre.show();
     </script>

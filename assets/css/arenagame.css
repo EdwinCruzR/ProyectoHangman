@@ -51,6 +51,14 @@
     border-radius: 70%;
 }
 .botonLetra:hover {
-    
+
     background-color: coral;
+}
+
+@media (max-height:680px){
+
+    #divHangman{
+        height: 210px;
+    }
+    
 }
