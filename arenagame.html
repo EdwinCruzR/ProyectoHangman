@@ -129,8 +129,8 @@
             </div>
             <div class="row oculto">
                 <div id="divAdivinaPasadoTipo" class="col-12">
-                    <form action="javascript:void(0);" method="post" class="form" id="formulario"
-                        onsubmit="hangmanApp.revisarPasado();">
+                    <form action="javascript:void(0);" method="post" class="form" 
+                        onsubmit="hangmanApp.revisarPasado();" id="formulario">
                         <label class="form-label">Selecciona el tipo de verbo: </label>
                         <div class="form-check mb-2">
                             <input class="form-check-input" type="radio" name="tipoV" id="regular" value="r" checked>
@@ -153,7 +153,7 @@
 
                         <div class="d-grid gap-2">
                             <button type="submit" name="btnSubmit" id="btnSubmit"
-                                class="btn btn-primary" onclick="hangmanApp.borrarform();">Enviar</button>
+                                class="btn btn-primary">Enviar</button>
                         </div>
                     </form>
                 </div>
@@ -335,6 +335,7 @@
             }
 
             this.adivinarPasado = () => {
+                
                 var verbo = hangmanApp.verboJuega["word"];
                 hangmanApp.divBotones.classList.add("quitar");
                 document.getElementById("helpId").innerHTML = "Escribe el pasado simple del verbo " + verbo.toLowerCase();
@@ -343,6 +344,7 @@
             };
 
             this.revisarPasado = () => {
+                let form=document.getElementById("formulario");
                 hangmanApp.divAdivinaPasadoTipo.classList.add("quitar");
                 tipoOk = hangmanApp.verboJuega["type"].toLowerCase();
                 pasadoOk = hangmanApp.verboJuega["simplepast"].toLowerCase();
@@ -363,7 +365,7 @@
                     this.puntos -= 10;
                     hangmanApp.perdio();
                 }
-
+                form.reset();
             };
 
             this.gano = () => {
@@ -448,9 +450,6 @@
                 }
             };
 
-            this.borrarform = () => {
-                formulario.reset();
-            }
         }
         modalNombre.show();
     </script>
