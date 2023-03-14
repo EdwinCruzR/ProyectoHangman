@@ -129,7 +129,7 @@
             </div>
             <div class="row oculto">
                 <div id="divAdivinaPasadoTipo" class="col-12">
-                    <form action="javascript:void(0);" method="post" class="form"
+                    <form action="javascript:void(0);" method="post" class="form" id="formulario"
                         onsubmit="hangmanApp.revisarPasado();">
                         <label class="form-label">Selecciona el tipo de verbo: </label>
                         <div class="form-check mb-2">
@@ -153,7 +153,7 @@
 
                         <div class="d-grid gap-2">
                             <button type="submit" name="btnSubmit" id="btnSubmit"
-                                class="btn btn-primary">Enviar</button>
+                                class="btn btn-primary" onclick="hangmanApp.borrarform();">Enviar</button>
                         </div>
                     </form>
                 </div>
@@ -447,6 +447,10 @@
                     this.terminar();
                 }
             };
+
+            this.borrarform = () => {
+                formulario.reset();
+            }
         }
         modalNombre.show();
     </script>
