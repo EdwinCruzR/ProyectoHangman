@@ -410,7 +410,6 @@
             };
 
             this.insertarJuego = async () => {
-               
                 var datosEnviar = { nombre: hangmanApp.nombre };
                 await fetch(this.urlApiArena + "?nuevo=1", { method: "POST", body: JSON.stringify(datosEnviar) })
                     .then(respuesta => respuesta.json())
