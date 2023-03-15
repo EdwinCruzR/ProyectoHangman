@@ -326,9 +326,6 @@
                                 hangmanApp.vidas--;
                                 hangmanApp.perdio();
                             }
-                            if (vidas==3){
-                                hangmanApp.spanVidas.innerHTML = "";
-                            }
                         }
                         let borraboton = document.getElementById(e.target.id);
                         divBotones.removeChild(borraboton);
@@ -377,12 +374,14 @@
             };
 
             this.perdio = () => {
+                
                 document.getElementById("modalTitleId2").innerHTML = "¡Incorrecto :( !";
                 modalResult.show();
             };
 
             this.valida = () => {
                 if (this.vidas == 0) {
+                    hangmanApp.spanVidas.innerHTML = "";
                     this.perdioLasVidas = true;
                     this.terminar();
                 }
