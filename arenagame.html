@@ -407,7 +407,6 @@
             };
 
             this.insertarJuego = async () => {
-               
                 var datosEnviar = { nombre: hangmanApp.nombre };
                 await fetch(this.urlApiArena + "?nuevo=1", { method: "POST", body: JSON.stringify(datosEnviar) })
                     .then(respuesta => respuesta.json())
@@ -421,7 +420,6 @@
 
             this.terminar = async () => {
                 document.getElementById("divBotones").disable=false;
-                
                 idSend = hangmanApp.datosjuego[0][0]["id"];
                 rindioSend = (hangmanApp.seRindio) ? 1 : 0;
                 puntosSend = (hangmanApp.seRindio) ? 0 : this.puntos;
