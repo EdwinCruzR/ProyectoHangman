@@ -326,6 +326,9 @@
                                 hangmanApp.vidas--;
                                 hangmanApp.perdio();
                             }
+                            if (vidas==3){
+                                hangmanApp.spanVidas.innerHTML = "";
+                            }
                         }
                         let borraboton = document.getElementById(e.target.id);
                         divBotones.removeChild(borraboton);
@@ -420,8 +423,7 @@
             };
 
             this.terminar = async () => {
-                document.getElementById("divBotones").disable=false;
-                
+                hangmanApp.divBotones.classList.add("quitar");
                 idSend = hangmanApp.datosjuego[0][0]["id"];
                 rindioSend = (hangmanApp.seRindio) ? 1 : 0;
                 puntosSend = (hangmanApp.seRindio) ? 0 : this.puntos;
