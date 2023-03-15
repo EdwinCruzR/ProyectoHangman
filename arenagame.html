@@ -420,6 +420,7 @@
             };
 
             this.terminar = async () => {
+                document.getElementById("divBotones").disable=false;
                 
                 idSend = hangmanApp.datosjuego[0][0]["id"];
                 rindioSend = (hangmanApp.seRindio) ? 1 : 0;
