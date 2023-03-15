@@ -326,7 +326,7 @@
                                 hangmanApp.vidas--;
                                 hangmanApp.perdio();
                             }
-                            if (vidas==3){
+                            if (this.vidas==0){
                                 hangmanApp.spanVidas.innerHTML = "";
                             }
                         }
@@ -377,12 +377,14 @@
             };
 
             this.perdio = () => {
+                
                 document.getElementById("modalTitleId2").innerHTML = "¡Incorrecto :( !";
                 modalResult.show();
             };
 
             this.valida = () => {
                 if (this.vidas == 0) {
+                    hangmanApp.spanVidas.innerHTML = "";
                     this.perdioLasVidas = true;
                     this.terminar();
                 }
