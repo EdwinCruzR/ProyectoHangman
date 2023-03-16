@@ -203,6 +203,7 @@
             this.urlApiWords = "./bd/apiwords.php";
             this.urlApiGeneral = "./bd/apigeneral.php";
             this.urlApiArena = "./bd/apiarena.php";
+            this.spinner = document.getElementById("loading");
 
             this.randomKey = (max) => {
                 return Math.floor(Math.random() * max);
@@ -260,8 +261,12 @@
                 hangmanApp.divAdivinaPasadoTipo.classList.remove("quitar");
                 hangmanApp.divAdivinaPasadoTipo.classList.remove("visible");
                 hangmanApp.divAdivinaPasadoTipo.classList.add("oculto");
+<<<<<<< HEAD
                 //document.getElementById("loading").style.display = "none";
                 document.getElementById("loading").classList.add("quitar");
+=======
+                hangmanApp.spinner.classList.add("quitar");
+>>>>>>> a47fa9b7a8d41b1fbe788eb61777c9178fd19584
                 document.getElementById("divPrincipal").classList.remove("oculto");
             };
 
@@ -427,8 +432,12 @@
             };
 
             this.terminar = async () => {
+<<<<<<< HEAD
                 //document.getElementById("loading").style.display = "block";
                 document.getElementById("loading").classList.remove("quitar");
+=======
+                hangmanApp.spinner.classList.add("visible");
+>>>>>>> a47fa9b7a8d41b1fbe788eb61777c9178fd19584
                 document.getElementById("vidas").style.display = "none";
                 document.getElementById("rendirse").style.display = "none";
                 document.getElementById("verbo").style.display = "none";
