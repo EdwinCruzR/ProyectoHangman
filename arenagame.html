@@ -159,11 +159,11 @@
                 </div>
             </div>
         </div>
-        <div id="loading2" class="row justify-content-center align-items-center g-2" style="height: 50vh;">
+        <!-- <div id="loading" class="row justify-content-center align-items-center g-2" style="height: 50vh;">
             <div class="spinner-border text-success" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>
-        </div>
+        </div> -->
     </main>
 
     <footer>
@@ -261,7 +261,6 @@
                 hangmanApp.divAdivinaPasadoTipo.classList.remove("visible");
                 hangmanApp.divAdivinaPasadoTipo.classList.add("oculto");
                 document.getElementById("loading").style.display = "none";
-                document.getElementById("loading2").style.display = "none";
                 document.getElementById("divPrincipal").classList.remove("oculto");
             };
 
@@ -387,7 +386,6 @@
 
             this.valida = () => {
                 if (this.vidas == 0) {
-                    document.getElementById("loading2").style.display = "block";
                     hangmanApp.spanVidas.innerHTML = "";
                     this.perdioLasVidas = true;
                     this.terminar();
@@ -428,7 +426,7 @@
             };
 
             this.terminar = async () => {
-                document.getElementById("loading2").style.display = "block";
+                document.getElementById("loading").style.display = "block";
                 document.getElementById("vidas").style.display = "none";
                 document.getElementById("rendirse").style.display = "none";
                 document.getElementById("verbo").style.display = "none";
