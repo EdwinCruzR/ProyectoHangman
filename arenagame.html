@@ -260,7 +260,8 @@
                 hangmanApp.divAdivinaPasadoTipo.classList.remove("quitar");
                 hangmanApp.divAdivinaPasadoTipo.classList.remove("visible");
                 hangmanApp.divAdivinaPasadoTipo.classList.add("oculto");
-                document.getElementById("loading").style.display = "none";
+                //document.getElementById("loading").style.display = "none";
+                document.getElementById("loading").classList.add("quitar");
                 document.getElementById("divPrincipal").classList.remove("oculto");
             };
 
@@ -351,9 +352,9 @@
             this.revisarPasado = () => {
                 let form=document.getElementById("formulario");
                 hangmanApp.divAdivinaPasadoTipo.classList.add("quitar");
-                tipoOk = hangmanApp.verboJuega["type"].toLowerCase();
-                pasadoOk = hangmanApp.verboJuega["simplepast"].toLowerCase();
-                pasadoTest = this.pasadoUsr.value.toLowerCase();
+                tipoOk = hangmanApp.verboJuega["type"].toLowerCase().trim();
+                pasadoOk = hangmanApp.verboJuega["simplepast"].toLowerCase().trim();
+                pasadoTest = this.pasadoUsr.value.toLowerCase().trim();
                 for (var i = 0; i < this.tipoUsr.length; i++) {
                     if (this.tipoUsr[i].checked) {
                         tipoTest = this.tipoUsr[i].value;
@@ -426,7 +427,8 @@
             };
 
             this.terminar = async () => {
-                document.getElementById("loading").style.display = "block";
+                //document.getElementById("loading").style.display = "block";
+                document.getElementById("loading").classList.remove("quitar");
                 document.getElementById("vidas").style.display = "none";
                 document.getElementById("rendirse").style.display = "none";
                 document.getElementById("verbo").style.display = "none";

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="es">
 <head>
-    <title>Title</title>
+    <title>Hangman: Tabla de posiciones general</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,7 +13,7 @@
         </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
         integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
-        </script>
+        </script><link rel="stylesheet" href="assets/css/arenagame.css">
 </head>
 
 <body>
@@ -21,6 +21,11 @@
         <!-- place navbar here -->
     </header>
     <main>
+        <div id="loading" class="row justify-content-center align-items-center g-2" style="height: 50vh;">
+            <div class="spinner-border text-success" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
         
         <!-- Modal Body -->
         <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
@@ -75,6 +80,8 @@
                 await fetch(this.urlApiArena + "?tablaGeneral=1")
                     .then(respuesta => respuesta.json())
                     .then((respuesta) => {
+                        document.getElementById("loading").classList.add("quitar");
+                        myModal.show();
                         respuesta.map(
                             function (registro, index, array) {
                                 tablaGeneral.tabla.innerHTML += "<tr><td>" + (index + 1) + "</td>" +
@@ -94,7 +101,7 @@
         }
 
         tablaGeneral.leer();
-        myModal.show();
+        
     </script>
 </body>
 
