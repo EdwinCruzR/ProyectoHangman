@@ -86,27 +86,27 @@
             <!-- <div class="row justify-content-center align-items-center"> -->
             <div class="row align-items-center">
                 <!-- <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 my-3"> -->
-                <div class="col">
+                <div id="vidas" class="col">
                     Vidas: <span class="spanVidas"></span>
                 </div>
                 <!-- <div class="col">
                     Intentos: <span class="spanIntentos"></span>
                 </div> -->
-                <div class="col">
+                <div id="puntos" class="col">
                     Puntos: <span class="spanPuntos"></span>
                 </div>
-                <div class="col">
+                <div id="rendirse" class="col">
                     <input name="btnRendirse" id="btnRendirse" class="btn btn-primary" type="button" value="Rendirse"
                         onclick="hangmanApp.rendir();">
                 </div>
             </div>
-            <div class="row">
+            <div id="verbo"class="row">
                 <div class="col-12 text-center">Verbo: 
                     <span class="spanVerbo">
                     </span>
                 </div>
             </div>
-            <div class="row">
+            <div id="pista" class="row">
                 <div class="col-12 text-center">
                     <span class="spanPista">
                     </span>
@@ -157,6 +157,11 @@
                         </div>
                     </form>
                 </div>
+            </div>
+        </div>
+        <div id="loading2" class="row justify-content-center align-items-center g-2" style="height: 50vh;">
+            <div class="spinner-border text-success" role="status">
+                <span class="visually-hidden">Loading...</span>
             </div>
         </div>
     </main>
@@ -256,6 +261,7 @@
                 hangmanApp.divAdivinaPasadoTipo.classList.remove("visible");
                 hangmanApp.divAdivinaPasadoTipo.classList.add("oculto");
                 document.getElementById("loading").style.display = "none";
+                document.getElementById("loading2").style.display = "none";
                 document.getElementById("divPrincipal").classList.remove("oculto");
             };
 
@@ -381,6 +387,7 @@
 
             this.valida = () => {
                 if (this.vidas == 0) {
+                    document.getElementById("loading2").style.display = "block";
                     hangmanApp.spanVidas.innerHTML = "";
                     this.perdioLasVidas = true;
                     this.terminar();
@@ -421,6 +428,15 @@
             };
 
             this.terminar = async () => {
+                document.getElementById("loading2").style.display = "block";
+                document.getElementById("vidas").style.display = "none";
+                document.getElementById("rendirse").style.display = "none";
+                document.getElementById("verbo").style.display = "none";
+                document.getElementById("pista").style.display = "none";
+                document.getElementById("divHangman").style.display = "none";
+                document.getElementById("puntos").style.display = "none";
+                hangmanApp.spanPista.classList.remove("quitar");
+                hangmanApp.spanVidas.classList.add("quitar");
                 hangmanApp.divBotones.classList.add("quitar");
                 idSend = hangmanApp.datosjuego[0][0]["id"];
                 rindioSend = (hangmanApp.seRindio) ? 1 : 0;
