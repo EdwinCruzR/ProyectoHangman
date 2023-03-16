@@ -203,6 +203,7 @@
             this.urlApiWords = "./bd/apiwords.php";
             this.urlApiGeneral = "./bd/apigeneral.php";
             this.urlApiArena = "./bd/apiarena.php";
+            this.spinner = document.getElementById("loading");
 
             this.randomKey = (max) => {
                 return Math.floor(Math.random() * max);
@@ -260,7 +261,7 @@
                 hangmanApp.divAdivinaPasadoTipo.classList.remove("quitar");
                 hangmanApp.divAdivinaPasadoTipo.classList.remove("visible");
                 hangmanApp.divAdivinaPasadoTipo.classList.add("oculto");
-                document.getElementById("loading").style.display = "none";
+                hangmanApp.spinner.classList.add("quitar");
                 document.getElementById("divPrincipal").classList.remove("oculto");
             };
 
@@ -426,7 +427,7 @@
             };
 
             this.terminar = async () => {
-                document.getElementById("loading").style.display = "block";
+                hangmanApp.spinner.classList.add("visible");
                 document.getElementById("vidas").style.display = "none";
                 document.getElementById("rendirse").style.display = "none";
                 document.getElementById("verbo").style.display = "none";
